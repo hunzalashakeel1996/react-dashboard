@@ -83,7 +83,7 @@ const KPISchema = new Schema(
                 get: v => v / 100
             }
         },
-        monthyData: [monthSchema],
+        monthlyData: [monthSchema],
         dailyData: [daySchema]
 
     },

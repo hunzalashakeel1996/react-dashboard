@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
@@ -17,6 +17,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use(morgan('common'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+import KPI from './models/KPI.js'
+import { kpis } from './data/data.js'
 
 // ROUTES
 app.use('/kpi', kpiRoutes)
@@ -32,6 +34,9 @@ mongoose.connect(process.env.MONGO_URL, {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`)
     })
+
+    // await mongoose.connection.db.dropDatabase()
+    // await KPI.insertMany(kpis)
 })
     .catch((error) => {
         console.log(error, 'did not connect')
