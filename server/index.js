@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import kpiRoutes from './routes/kpi.js'
 
 // CONFIGURATION 
 dotenv.config()
@@ -17,7 +18,11 @@ app.use(morgan('common'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+// ROUTES
+app.use('/kpi', kpiRoutes)
+
 // MONGOOSE SETUP 
+mongoose.set('strictQuery', false)
 const PORT = process.env.PORT || 9000
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -29,5 +34,5 @@ mongoose.connect(process.env.MONGO_URL, {
     })
 })
     .catch((error) => {
-        console.log('did not connect')
+        console.log(error, 'did not connect')
     })
