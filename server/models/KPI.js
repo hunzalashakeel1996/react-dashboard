@@ -17,7 +17,7 @@ const daySchema = new Schema(
             currency: 'USD',
             get: v => v / 100
         },
-        operationExpenses: {
+        operationalExpenses: {
             type: mongoose.Types.Currency,
             currency: 'USD',
             get: v => v / 100
@@ -44,7 +44,7 @@ const monthSchema = new Schema(
             currency: 'USD',
             get: v => v / 100
         },
-        operationExpenses: {
+        operationalExpenses: {
             type: mongoose.Types.Currency,
             currency: 'USD',
             get: v => v / 100

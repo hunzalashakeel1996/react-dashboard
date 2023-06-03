@@ -6,6 +6,10 @@ import dotenv from 'dotenv'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import kpiRoutes from './routes/kpi.js'
+import productRoutes from './routes/product.js'
+import Product from './models/Product.js'
+import KPI from './models/KPI.js'
+import { kpis, products } from './data/data.js'
 
 // CONFIGURATION 
 dotenv.config()
@@ -17,11 +21,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }))
 app.use(morgan('common'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-import KPI from './models/KPI.js'
-import { kpis } from './data/data.js'
+
 
 // ROUTES
 app.use('/kpi', kpiRoutes)
+app.use('/product', productRoutes)
 
 // MONGOOSE SETUP 
 mongoose.set('strictQuery', false)
@@ -37,6 +41,7 @@ mongoose.connect(process.env.MONGO_URL, {
 
     // await mongoose.connection.db.dropDatabase()
     // await KPI.insertMany(kpis)
+    // await Product.insertMany(products)
 })
     .catch((error) => {
         console.log(error, 'did not connect')
